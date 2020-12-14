@@ -7,9 +7,9 @@ import FileBase from 'react-file-base64';
 import useStyles from './styles';
 
 const Form = ({ currentId, setCurrentId }) => {
-  const [puppyData, SetPuppyData] = useState({
+  const [puppyData, setPuppyData] = useState({
     name: '',
-    age: '',
+    birthday: '',
     breed: '',
     weight: '',
     height: '',
@@ -22,14 +22,14 @@ const Form = ({ currentId, setCurrentId }) => {
   const classes = useStyles();
 
   useEffect(() => {
-    if (puppy) SetPuppyData(puppy);
+    if (puppy) setPuppyData(puppy);
   }, [puppy]);
 
   const clear = () => {
     setCurrentId(0);
-    SetPuppyData({
+    setPuppyData({
       name: '',
-      age: '',
+      birthday: '',
       breed: '',
       weight: '',
       height: '',
@@ -50,9 +50,96 @@ const Form = ({ currentId, setCurrentId }) => {
   };
 
   return (
-    <div>
-      <h1>Form</h1>
-    </div>
+    <Paper className={classes.paper}>
+      <form
+        autoComplete='off'
+        noValidate
+        className={`${classes.root} ${classes.form}`}
+        onSubmit={handleSubmit}
+      >
+        <Typography variant='h6'>
+          {currentId ? `Editing "${puppy.name}"` : 'Adding a Puppy'}
+        </Typography>
+        <TextField
+          name='name'
+          variant='outlined'
+          label='name'
+          fullWidth
+          value={puppyData.name}
+          onChange={(e) => setPuppyData({ ...puppyData, name: e.target.value })}
+        />
+        <TextField
+          name='birthday'
+          variant='outlined'
+          label='birthday'
+          fullWidth
+          value={puppyData.birthday}
+          onChange={(e) =>
+            setPuppyData({ ...puppyData, birthday: e.target.value })
+          }
+        />
+        <TextField
+          name='breed'
+          variant='outlined'
+          label='breed'
+          fullWidth
+          multiline
+          rows={4}
+          value={puppyData.breed}
+          onChange={(e) =>
+            setPuppyData({ ...puppyData, breed: e.target.value })
+          }
+        />
+        <TextField
+          name='weight'
+          variant='outlined'
+          label='weight'
+          fullWidth
+          value={puppyData.weight}
+          onChange={(e) =>
+            setPuppyData({ ...puppyData, weight: e.target.value })
+          }
+        />
+        <TextField
+          name='height'
+          variant='outlined'
+          label='height'
+          fullWidth
+          value={puppyData.height}
+          onChange={(e) =>
+            setPuppyData({ ...puppyData, height: e.target.value })
+          }
+        />
+        <div className={classes.fileInput}>
+          <FileBase
+            type='file'
+            multiple={false}
+            onDone={({ base64 }) =>
+              setPuppyData({ ...puppyData, photo: base64 })
+            }
+          />
+        </div>
+        <Button
+          className={classes.buttonSubmit}
+          variant='contained'
+          color='primary'
+          size='large'
+          type='submit'
+          fullWidth
+        >
+          Submit
+        </Button>
+        <Button
+          variant='contained'
+          color='secondary'
+          size='small'
+          onClick={clear}
+          fullWidth
+        >
+          Clear
+        </Button>
+      </form>
+    </Paper>
   );
 };
 
