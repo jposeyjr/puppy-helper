@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
 
-import puppy from './puppy';
+import puppies from './puppy';
 
-export const reducers = combineReducers({ puppy });
+export const reducers = combineReducers({ puppies });

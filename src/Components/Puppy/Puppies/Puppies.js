@@ -17,7 +17,6 @@ import useStyles from './styles';
 const Puppies = ({ puppy, setCurrentId }) => {
   const dispatch = useDispatch();
   const classes = useStyles();
-
   return (
     <Card className={classes.root}>
       <CardMedia

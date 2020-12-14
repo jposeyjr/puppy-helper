@@ -52,7 +52,6 @@ export const updatePuppy = async (req, res) => {
 
 export const deletePuppy = async (req, res) => {
   const { id } = req.params;
-
   if (!mongoose.Types.ObjectId.isValid(id))
     return res.status(404).send(`No puppy with id: ${id}`);
 

@@ -6,10 +6,10 @@ import Puppies from './Puppies/Puppies';
 import useStyles from './style';
 
 const Puppy = ({ setCurrentId }) => {
-  const puppy = useSelector((state) => state.puppy);
+  const puppies = useSelector((state) => state.puppies);
   const classes = useStyles();
-  console.log(puppy);
-  return !puppy.length ? (
+  console.log(puppies);
+  return !puppies.length ? (
     <CircularProgress />
   ) : (
     <Grid
@@ -18,7 +18,7 @@ const Puppy = ({ setCurrentId }) => {
       alignItems='stretch'
       spacing={3}
     >
-      {puppy.map((puppy) => (
+      {puppies.map((puppy) => (
         <Grid key={puppy._id} item xs={12} sm={6} md={6}>
           <Puppies puppy={puppy} setCurrentId={setCurrentId} />
         </Grid>

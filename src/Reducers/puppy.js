@@ -4,6 +4,7 @@ import { FETCH_ALL, UPDATE, DELETE, CREATE } from '../Constants/actionsTypes';
 export default (puppies = [], action) => {
   switch (action.type) {
     case FETCH_ALL:
+      console.log('test');
       return action.payload;
     case CREATE:
       return [...puppies, action.payload];
@@ -12,7 +13,7 @@ export default (puppies = [], action) => {
         puppy._id === action.payload._id ? action.payload : puppies
       );
     case DELETE:
-      return puppies.filter((puppy) => puppy._id !== action.payload._id);
+      return puppies.filter((puppy) => puppy._id !== action.payload);
     default:
       return puppies;
   }

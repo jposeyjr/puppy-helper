@@ -32,6 +32,7 @@ export const deletePuppy = (id) => async (dispatch) => {
   try {
     await api.deletePuppy(id);
     dispatch({ type: DELETE, payload: id });
+    console.log('delete dispatched?', id);
   } catch (error) {
     console.log(error.message);
   }

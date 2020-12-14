@@ -15,7 +15,7 @@ const Form = ({ currentId, setCurrentId }) => {
     photo: '',
   });
   const puppy = useSelector((state) =>
-    currentId ? state.puppy.find((dog) => dog._id === currentId) : null
+    currentId ? state.puppies.find((dog) => dog._id === currentId) : null
   );
   const dispatch = useDispatch();
   const classes = useStyles();
@@ -72,7 +72,6 @@ const Form = ({ currentId, setCurrentId }) => {
           type='date'
           variant='outlined'
           label='Birthday'
-          defaultValue='2018-12-02'
           InputLabelProps={{ shrink: true }}
           fullWidth
           value={puppyData.birthday}
@@ -95,7 +94,7 @@ const Form = ({ currentId, setCurrentId }) => {
         <TextField
           name='weight'
           variant='outlined'
-          label='Weight'
+          label='*Weight Optional'
           fullWidth
           value={puppyData.weight}
           onChange={(e) =>
@@ -105,7 +104,7 @@ const Form = ({ currentId, setCurrentId }) => {
         <TextField
           name='height'
           variant='outlined'
-          label='Height'
+          label='*Height Optional'
           fullWidth
           value={puppyData.height}
           onChange={(e) =>
