@@ -3,7 +3,6 @@ import { TextField, Button, Typography, Paper } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { createPuppy, updatePuppy } from '../../Actions/puppy';
 import FileBase from 'react-file-base64';
-
 import useStyles from './styles';
 
 const Form = ({ currentId, setCurrentId }) => {
@@ -16,7 +15,7 @@ const Form = ({ currentId, setCurrentId }) => {
     photo: '',
   });
   const puppy = useSelector((state) =>
-    currentId ? state.puppies.find((dog) => dog._id === currentId) : null
+    currentId ? state.puppy.find((dog) => dog._id === currentId) : null
   );
   const dispatch = useDispatch();
   const classes = useStyles();
@@ -63,15 +62,18 @@ const Form = ({ currentId, setCurrentId }) => {
         <TextField
           name='name'
           variant='outlined'
-          label='name'
+          label='Name'
           fullWidth
           value={puppyData.name}
           onChange={(e) => setPuppyData({ ...puppyData, name: e.target.value })}
         />
         <TextField
           name='birthday'
+          type='date'
           variant='outlined'
-          label='birthday'
+          label='Birthday'
+          defaultValue='2018-12-02'
+          InputLabelProps={{ shrink: true }}
           fullWidth
           value={puppyData.birthday}
           onChange={(e) =>
@@ -81,7 +83,7 @@ const Form = ({ currentId, setCurrentId }) => {
         <TextField
           name='breed'
           variant='outlined'
-          label='breed'
+          label='Breed'
           fullWidth
           multiline
           rows={4}
@@ -93,7 +95,7 @@ const Form = ({ currentId, setCurrentId }) => {
         <TextField
           name='weight'
           variant='outlined'
-          label='weight'
+          label='Weight'
           fullWidth
           value={puppyData.weight}
           onChange={(e) =>
@@ -103,7 +105,7 @@ const Form = ({ currentId, setCurrentId }) => {
         <TextField
           name='height'
           variant='outlined'
-          label='height'
+          label='Height'
           fullWidth
           value={puppyData.height}
           onChange={(e) =>

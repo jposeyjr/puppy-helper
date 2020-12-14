@@ -3,8 +3,8 @@ import { Container, AppBar, Typography, Grow, Grid } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 
 import Form from './Components/Form/Form';
-import Potty from './Components/Potty/Potty';
-import puppy from './images/puppy.svg';
+import Puppy from './Components/Puppy/Puppy';
+import puppyImg from './images/puppy.svg';
 import { getPuppies } from './Actions/puppy';
 import useStyles from './styles';
 
@@ -23,7 +23,7 @@ const App = () => {
         <Typography className={classes.heading} variant='h2' align='center'>
           Puppy Helper
         </Typography>
-        <img className={classes.image} src={puppy} alt='icon' height='60' />
+        <img className={classes.image} src={puppyImg} alt='icon' height='60' />
       </AppBar>
       <Grow in>
         <Container>
@@ -34,7 +34,7 @@ const App = () => {
             spacing={3}
           >
             <Grid item xs={12} sm={7}>
-              <Potty setCurrentId={setCurrentId} />
+              <Puppy setCurrentId={setCurrentId} />
             </Grid>
             <Grid item xs={12} sm={4}>
               <Form currentId={currentId} setCurrentId={setCurrentId} />
