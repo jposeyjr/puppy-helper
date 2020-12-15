@@ -14,10 +14,16 @@ import { useDispatch } from 'react-redux';
 import moment from 'moment';
 import { deletePuppy } from '../../../Actions/puppy';
 import useStyles from './styles';
+import { useHistory } from 'react-router-dom';
 
 const Puppies = ({ puppy, setCurrentId }) => {
   const dispatch = useDispatch();
   const classes = useStyles();
+  const history = useHistory();
+
+  const routeChange = () => {
+    history.push('/tracker');
+  };
   return (
     <Card component={Card} className={classes.root}>
       <CardMedia
@@ -43,11 +49,15 @@ const Puppies = ({ puppy, setCurrentId }) => {
           Birthday: {moment(puppy.birthday).format('ll')}
         </Typography>
       </CardContent>
+
       <CardActions>
         <Button
           size='small'
           color='primary'
-          onClick={() => dispatch(deletePuppy(puppy._id))}
+          onClick={() => {
+            // dispatch(deletePuppy(puppy._id))
+            routeChange();
+          }}
         >
           <ScheduleIcon frontSize='medium' /> Track
         </Button>
