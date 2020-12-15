@@ -2,7 +2,7 @@
 ![TOP_LANGUAGE](https://img.shields.io/github/languages/top/jposeyjr/puppy-helper.svg?style=flat-square)
 ![FORKS](https://img.shields.io/github/forks/jposeyjr/puppy-helper.svg?style=social)
 
-#Puppy Helper
+# Puppy Helper
 
 ## Description
 Puppy-Helper is an app that is designed to help raise your new puppy! I found that with babies you could find a lot of applications to help you track almost anything. But this was not the case for puppies and I wanted to change that. With Puppy-Helper you are able to add multiple dogs and track their trick progress, napping times, food usage, vet visits, medicine and potty tracking.
