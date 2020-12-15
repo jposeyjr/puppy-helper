@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { TextField, Button, Typography, Paper } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import { createPuppy, updatePuppy } from '../../Actions/puppy';
-import FileBase from 'react-file-base64';
+import FileUpload from '../FileUpload/FileUpload';
 import useStyles from './styles';
 
 const Form = ({ currentId, setCurrentId }) => {
@@ -85,7 +85,7 @@ const Form = ({ currentId, setCurrentId }) => {
           label='Breed'
           fullWidth
           multiline
-          rows={4}
+          rows={3}
           value={puppyData.breed}
           onChange={(e) =>
             setPuppyData({ ...puppyData, breed: e.target.value })
@@ -112,8 +112,8 @@ const Form = ({ currentId, setCurrentId }) => {
           }
         />
         <div className={classes.fileInput}>
-          <FileBase
-            type='file'
+          <FileUpload
+            accept={'.jpeg, .png, .jpg'}
             multiple={false}
             onDone={({ base64 }) =>
               setPuppyData({ ...puppyData, photo: base64 })
@@ -124,7 +124,7 @@ const Form = ({ currentId, setCurrentId }) => {
           className={classes.buttonSubmit}
           variant='contained'
           color='primary'
-          size='large'
+          size='medium'
           type='submit'
           fullWidth
         >
@@ -133,7 +133,7 @@ const Form = ({ currentId, setCurrentId }) => {
         <Button
           variant='contained'
           color='secondary'
-          size='small'
+          size='medium'
           onClick={clear}
           fullWidth
         >

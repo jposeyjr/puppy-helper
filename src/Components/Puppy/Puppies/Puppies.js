@@ -9,6 +9,7 @@ import {
 } from '@material-ui/core/';
 import DeleteIcon from '@material-ui/icons/Delete';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
+import ScheduleIcon from '@material-ui/icons/Schedule';
 import { useDispatch } from 'react-redux';
 import moment from 'moment';
 import { deletePuppy } from '../../../Actions/puppy';
@@ -18,7 +19,7 @@ const Puppies = ({ puppy, setCurrentId }) => {
   const dispatch = useDispatch();
   const classes = useStyles();
   return (
-    <Card className={classes.root}>
+    <Card component={Card} className={classes.root}>
       <CardMedia
         component='img'
         alt={puppy.name}
@@ -43,6 +44,13 @@ const Puppies = ({ puppy, setCurrentId }) => {
         </Typography>
       </CardContent>
       <CardActions>
+        <Button
+          size='small'
+          color='primary'
+          onClick={() => dispatch(deletePuppy(puppy._id))}
+        >
+          <ScheduleIcon frontSize='medium' /> Track
+        </Button>
         <Button
           size='small'
           color='primary'

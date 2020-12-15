@@ -10,7 +10,7 @@ export default (puppies = [], action) => {
       return [...puppies, action.payload];
     case UPDATE:
       return puppies.map((puppy) =>
-        puppy._id === action.payload._id ? action.payload : puppies
+        puppy._id === action.payload._id ? action.payload : puppy
       );
     case DELETE:
       return puppies.filter((puppy) => puppy._id !== action.payload);

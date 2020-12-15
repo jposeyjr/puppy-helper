@@ -1,7 +1,6 @@
 import React from 'react';
 import { Grid, CircularProgress } from '@material-ui/core';
 import { useSelector } from 'react-redux';
-
 import Puppies from './Puppies/Puppies';
 import useStyles from './style';
 
@@ -16,10 +15,10 @@ const Puppy = ({ setCurrentId }) => {
       className={classes.container}
       container
       alignItems='stretch'
-      spacing={3}
+      spacing={2}
     >
       {puppies.map((puppy) => (
-        <Grid key={puppy._id} item xs={12} sm={6} md={6}>
+        <Grid key={puppy._id} item xs={12} sm={6} md={4} lg={3}>
           <Puppies puppy={puppy} setCurrentId={setCurrentId} />
         </Grid>
       ))}
