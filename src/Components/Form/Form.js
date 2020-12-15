@@ -63,6 +63,7 @@ const Form = ({ currentId, setCurrentId }) => {
           name='name'
           variant='outlined'
           label='Name'
+          helperText='Please enter your puppies name'
           fullWidth
           value={puppyData.name}
           onChange={(e) => setPuppyData({ ...puppyData, name: e.target.value })}
@@ -70,6 +71,7 @@ const Form = ({ currentId, setCurrentId }) => {
         <TextField
           name='birthday'
           type='date'
+          helperText='Please enter your puppies birthday'
           variant='outlined'
           label='Birthday'
           InputLabelProps={{ shrink: true }}
@@ -82,6 +84,7 @@ const Form = ({ currentId, setCurrentId }) => {
         <TextField
           name='breed'
           variant='outlined'
+          helperText='Please enter your puppies breed'
           label='Breed'
           fullWidth
           multiline
@@ -94,6 +97,7 @@ const Form = ({ currentId, setCurrentId }) => {
         <TextField
           name='weight'
           variant='outlined'
+          helperText='Optional entry for puppies weight'
           label='*Weight Optional'
           fullWidth
           value={puppyData.weight}
@@ -104,6 +108,7 @@ const Form = ({ currentId, setCurrentId }) => {
         <TextField
           name='height'
           variant='outlined'
+          helperText='Optional entry for puppies height'
           label='*Height Optional'
           fullWidth
           value={puppyData.height}
