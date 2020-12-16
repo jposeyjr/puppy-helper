@@ -7,7 +7,6 @@ import useStyles from './style';
 const Puppy = ({ setCurrentId }) => {
   const puppies = useSelector((state) => state.puppies);
   const classes = useStyles();
-  console.log(puppies);
   return !puppies.length ? (
     <CircularProgress />
   ) : (

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+import { HashRouter as Router, Route } from 'react-router-dom';
 import { getPuppies } from './Actions/puppy';
 import Home from './Components/Home/Home';
 import Tracker from './Components/Tracker/Tracker';
