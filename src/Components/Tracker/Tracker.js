@@ -1,6 +1,6 @@
 import React from 'react';
 import useStyles from './styles';
-import { Paper, TextField, Button, Typography } from '@material-ui/core';
+import { Paper, Button, Typography } from '@material-ui/core';
 import Header from '../Header/Header';
 const Tracker = () => {
   const classes = useStyles();
