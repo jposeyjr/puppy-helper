@@ -55,7 +55,6 @@ const Puppies = ({ puppy, setCurrentId }) => {
           size='small'
           color='primary'
           onClick={() => {
-            // dispatch(deletePuppy(puppy._id))
             routeChange();
           }}
         >
