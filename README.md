@@ -8,6 +8,8 @@
 
 Puppy-Helper is an app that is designed to help raise your new puppy! I found that with babies you could find a lot of applications to help you track almost anything. But this was not the case for puppies and I wanted to change that. With Puppy-Helper you are able to add multiple dogs and track their trick progress, napping times, food usage, vet visits, medicine and potty tracking.
 
+Puppy-Helper was used to learn MongoDB and Thunk and is still in progress.
+
 ## Duration
 
 5 Hours
