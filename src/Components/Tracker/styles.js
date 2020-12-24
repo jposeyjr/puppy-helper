@@ -1,18 +1,27 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export default makeStyles((theme) => ({
-  tracker: {
-    padding: theme.spacing(3),
-    margin: theme.spacing(1),
+  root: {
     display: 'flex',
-    flexWrap: 'wrap',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
   },
   paper: {
     padding: theme.spacing(3),
+    margin: theme.spacing(1),
+    alignContent: 'center',
+    flexWrap: 'wrap',
+    flexDirection: 'column',
   },
-  margin: {
+  header: {
+    margin: theme.spacing(1),
+  },
+  activity: {
+    padding: theme.spacing(2),
+    display: 'flex',
+    flexDirection: 'column',
+    margin: theme.spacing(2),
+  },
+  button: {
     margin: theme.spacing(1),
   },
 }));

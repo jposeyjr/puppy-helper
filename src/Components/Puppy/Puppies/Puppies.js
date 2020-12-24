@@ -58,14 +58,14 @@ const Puppies = ({ puppy, setCurrentId }) => {
             routeChange();
           }}
         >
-          <ScheduleIcon frontSize='medium' /> Track
+          <ScheduleIcon /> Track
         </Button>
         <Button
           size='small'
           color='primary'
           onClick={() => dispatch(deletePuppy(puppy._id))}
         >
-          <DeleteIcon fontSize='small' /> Delete
+          <DeleteIcon /> Delete
         </Button>
       </CardActions>
     </Card>

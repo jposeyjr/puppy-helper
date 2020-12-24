@@ -1,7 +1,7 @@
 import TrackerData from '../models/trackerData.js';
 import mongoose from 'mongoose';
 
-export const getPotty = async (req, res) => {
+export const getTracker = async (req, res) => {
   try {
     const pottyData = await TrackerData.find();
     res.status(200).json(pottyData);
@@ -10,11 +10,10 @@ export const getPotty = async (req, res) => {
   }
 };
 
-export const createData = async (req, res) => {
-  const { startTime, stopTime, activity } = req.body;
+export const createTracker = async (req, res) => {
+  const { time, activity } = req.body;
   const newPotty = new TrackerData({
-    startTime,
-    stopTime,
+    time,
     activity,
   });
   try {
@@ -25,30 +24,29 @@ export const createData = async (req, res) => {
   }
 };
 
-export const updatePotty = async (req, res) => {
+export const updateTracker = async (req, res) => {
   const { id } = req.params;
-  const { startTime, stopTime, activity } = req.body;
+  const { time, activity } = req.body;
 
   if (!mongoose.Types.ObjectId.isValid(id))
-    return res.status(404).send(`No potty data with that id: ${id}`);
+    return res.status(404).send(`No potty data with that id to update: ${id}`);
 
-  const updatedPotty = new TrackerData({
-    startTime,
-    stopTime,
+  const updatedTracker = new TrackerData({
+    time,
     activity,
   });
 
-  await TrackerData.findByIdAndUpdate(id, updatedPotty, { new: true });
+  await TrackerData.findByIdAndUpdate(id, updatedTracker, { new: true });
 
-  res.json(updatedPotty);
+  res.json(updatedTracker);
 };
 
-export const deletePotty = async (req, res) => {
+export const deleteTracker = async (req, res) => {
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id))
-    return res.status(404).send(`No potty data with id: ${id}`);
+    return res.status(404).send(`No potty data with id to delete: ${id}`);
 
   await TrackerData.findByIdAndRemove(id);
 
-  res.json({ message: 'Potty removed successfully.' });
+  res.json({ message: 'Tracker removed successfully.' });
 };

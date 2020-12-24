@@ -1,15 +1,15 @@
 import express from 'express';
 import {
-  getPotty,
-  createPotty,
-  updatePotty,
-  deletePotty,
+  getTracker,
+  createTracker,
+  updateTracker,
+  deleteTracker,
 } from '../controllers/tracker.js';
 const router = express.Router();
 
-router.get('/tracker', getPotty);
-router.post('/tracker', createPotty);
-router.patch('/tracker:id', updatePotty);
-router.delete('/tracker:id', deletePotty);
+router.get('/', getTracker);
+router.post('/', createTracker);
+router.patch('/:id', updateTracker);
+router.delete('/:id', deleteTracker);
 
 export default router;

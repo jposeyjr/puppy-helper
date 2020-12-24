@@ -1,8 +1,7 @@
 import mongoose from 'mongoose';
 
 const trackerSchema = mongoose.Schema({
-  startTime: String,
-  stopTime: String,
+  time: Number,
   activity: String,
 });
 

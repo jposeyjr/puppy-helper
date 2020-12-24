@@ -1,55 +1,144 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import useStyles from './styles';
-import { Paper, Button, Typography } from '@material-ui/core';
+import {
+  Paper,
+  Button,
+  Typography,
+  NativeSelect,
+  InputLabel,
+} from '@material-ui/core';
 import Header from '../Header/Header';
+import { useDispatch } from 'react-redux';
+import { createTracker } from '../../Actions/tracker';
 const Tracker = () => {
+  const [time, setTime] = useState(0);
+  const [activity, setActivity] = useState('');
+  const [isActive, setIsActive] = useState(false);
+  const countRef = useRef(null);
+  const dispatch = useDispatch();
   const classes = useStyles();
+
+  const handleChange = (e) => {
+    setActivity(e.target.value);
+  };
+  const formatTime = () => {
+    const getSeconds = `0${time % 60}`.slice(-2);
+    const minutes = `${Math.floor(time / 60)}`;
+    const getMinutes = `0${minutes % 60}`.slice(-2);
+    const getHours = `0${Math.floor(time / 3600)}`.slice(-2);
+
+    return `${getHours} : ${getMinutes} : ${getSeconds}`;
+  };
+
+  const startTimer = () => {
+    setIsActive(true);
+    countRef.current = setInterval(() => {
+      setTime((time) => time + 1);
+    }, 1000);
+  };
+
+  const restartTimer = () => {
+    clearInterval(countRef.current);
+    setIsActive(false);
+    setTime(0);
+  };
+
+  const submitTime = () => {
+    let timeObj = {
+      time: time,
+      activity: activity,
+    };
+    dispatch(createTracker(timeObj));
+    clearInterval(countRef.current);
+    setIsActive(false);
+    setTime(0);
+  };
+
+  const stopTime = () => {
+    clearInterval(countRef.current);
+    setIsActive(false);
+  };
+
   return (
-    <div className={classes.tracker}>
+    <>
       <Header />
-      <Paper elevation={3} className={classes.paper}>
-        <Typography variant='h3'>Potty Tracker</Typography>
-        <Typography variant='h6'>Activity Start</Typography>
-        <div className={classes.activity}>
-          <Button
-            variant={'contained'}
-            size='large'
-            color={'primary'}
-            className={classes.margin}
-          >
-            Food
-          </Button>
-          <Button
-            variant={'contained'}
-            size='large'
-            color={'primary'}
-            className={classes.margin}
-          >
-            Water
-          </Button>
-          <Button
-            variant={'contained'}
-            size='large'
-            color={'primary'}
-            className={classes.margin}
-          >
-            Play
-          </Button>
-          <Button
-            variant={'contained'}
-            size='large'
-            color={'primary'}
-            className={classes.margin}
-          >
-            Nap
-          </Button>
-        </div>
-        <Typography variant='h6'>Potty Achieved</Typography>
-        <Button variant={'contained'} size='large' color={'secondary'}>
-          Stop Timer
-        </Button>
-      </Paper>
-    </div>
+      <div className={classes.root}>
+        <Paper elevation={3} className={classes.paper}>
+          <Typography className={classes.header} component='h1' variant='h2'>
+            Potty Tracker
+          </Typography>
+          <Typography className={classes.header} align='center' variant='h4'>
+            {formatTime()}
+          </Typography>
+          <div className={classes.activity}>
+            <InputLabel htmlFor='select'>Puppy Activity</InputLabel>
+            <NativeSelect
+              id='select'
+              value={activity}
+              onChange={handleChange}
+              inputProps={{ name: 'activity', id: 'select' }}
+            >
+              <option aria-label='None' value='' />
+              <option value={'Food'}>Food</option>
+              <option value={'Water'}>Water</option>
+              <option value={'Play'}>Play</option>
+              <option value={'Sleep'}>Sleep</option>
+            </NativeSelect>
+            {!isActive ? (
+              <Button
+                aria-live='polite'
+                className={classes.button}
+                variant={'contained'}
+                size='large'
+                color={'primary'}
+                onClick={() => {
+                  startTimer();
+                }}
+              >
+                Start
+              </Button>
+            ) : (
+              <Button
+                aria-live='polite'
+                className={classes.button}
+                variant={'contained'}
+                size='large'
+                color={'secondary'}
+                onClick={() => {
+                  stopTime(time);
+                }}
+              >
+                Stop
+              </Button>
+            )}
+            <Button
+              className={classes.button}
+              variant={'contained'}
+              size='large'
+              color={'primary'}
+              onClick={() => {
+                restartTimer();
+              }}
+            >
+              Restart
+            </Button>
+            <Typography variant='h6'>Potty Achieved</Typography>
+
+            <Button
+              className={classes.button}
+              variant={'contained'}
+              size='large'
+              color={'secondary'}
+              onClick={() => {
+                submitTime(time);
+              }}
+            >
+              Submit Time
+            </Button>
+          </div>
+        </Paper>
+      </div>
+    </>
   );
 };
 
