@@ -9,6 +9,7 @@ export const updatePuppy = (id, updatedPuppy) =>
 export const deletePuppy = (id) => axios.delete(`${url}/puppy/${id}`);
 
 export const fetchData = () => axios.get(`${url}/tracker/`);
+export const fetchById = (id) => axios.get(`${url}/tracker/${id}`);
 export const createTracker = (newTracker) =>
   axios.post(`${url}/tracker/`, newTracker);
 export const updateTracker = (id, updatedTracker) =>

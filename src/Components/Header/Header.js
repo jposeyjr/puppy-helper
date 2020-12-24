@@ -1,3 +1,4 @@
+import React from 'react';
 import puppyImg from '../../images/puppy.svg';
 import { AppBar, Typography } from '@material-ui/core';
 import useStyles from './styles';

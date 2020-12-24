@@ -1,6 +1,7 @@
 import express from 'express';
 import {
   getTracker,
+  getTrackerById,
   createTracker,
   updateTracker,
   deleteTracker,
@@ -8,6 +9,7 @@ import {
 const router = express.Router();
 
 router.get('/', getTracker);
+router.get('/:id', getTrackerById);
 router.post('/', createTracker);
 router.patch('/:id', updateTracker);
 router.delete('/:id', deleteTracker);

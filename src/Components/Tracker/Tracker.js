@@ -7,13 +7,14 @@ import {
   NativeSelect,
   InputLabel,
 } from '@material-ui/core';
-import Header from '../Header/Header';
 import { useDispatch } from 'react-redux';
 import { createTracker } from '../../Actions/tracker';
-const Tracker = () => {
+
+const Tracker = (props) => {
   const [time, setTime] = useState(0);
   const [activity, setActivity] = useState('');
   const [isActive, setIsActive] = useState(false);
+
   const countRef = useRef(null);
   const dispatch = useDispatch();
   const classes = useStyles();
@@ -21,6 +22,7 @@ const Tracker = () => {
   const handleChange = (e) => {
     setActivity(e.target.value);
   };
+
   const formatTime = () => {
     const getSeconds = `0${time % 60}`.slice(-2);
     const minutes = `${Math.floor(time / 60)}`;
@@ -39,19 +41,25 @@ const Tracker = () => {
 
   const restartTimer = () => {
     clearInterval(countRef.current);
+    setActivity('');
     setIsActive(false);
     setTime(0);
   };
 
   const submitTime = () => {
-    let timeObj = {
-      time: time,
-      activity: activity,
-    };
-    dispatch(createTracker(timeObj));
-    clearInterval(countRef.current);
-    setIsActive(false);
-    setTime(0);
+    if (!isActive && activity.length > 1) {
+      let timeObj = {
+        time: time,
+        activity: activity,
+        puppyId: props.currentId,
+      };
+      dispatch(createTracker(timeObj));
+      clearInterval(countRef.current);
+      setIsActive(false);
+      setTime(0);
+    } else {
+      alert('Please stop the timer before submitting time');
+    }
   };
 
   const stopTime = () => {
@@ -60,85 +68,86 @@ const Tracker = () => {
   };
 
   return (
-    <>
-      <Header />
-      <div className={classes.root}>
-        <Paper elevation={3} className={classes.paper}>
-          <Typography className={classes.header} component='h1' variant='h2'>
-            Potty Tracker
-          </Typography>
-          <Typography className={classes.header} align='center' variant='h4'>
-            {formatTime()}
-          </Typography>
-          <div className={classes.activity}>
-            <InputLabel htmlFor='select'>Puppy Activity</InputLabel>
-            <NativeSelect
-              id='select'
-              value={activity}
-              onChange={handleChange}
-              inputProps={{ name: 'activity', id: 'select' }}
-            >
-              <option aria-label='None' value='' />
-              <option value={'Food'}>Food</option>
-              <option value={'Water'}>Water</option>
-              <option value={'Play'}>Play</option>
-              <option value={'Sleep'}>Sleep</option>
-            </NativeSelect>
-            {!isActive ? (
-              <Button
-                aria-live='polite'
-                className={classes.button}
-                variant={'contained'}
-                size='large'
-                color={'primary'}
-                onClick={() => {
-                  startTimer();
-                }}
-              >
-                Start
-              </Button>
-            ) : (
-              <Button
-                aria-live='polite'
-                className={classes.button}
-                variant={'contained'}
-                size='large'
-                color={'secondary'}
-                onClick={() => {
-                  stopTime(time);
-                }}
-              >
-                Stop
-              </Button>
-            )}
+    <div className={classes.root}>
+      <Paper elevation={3} className={classes.paper}>
+        <Typography className={classes.header} component='h1' variant='h2'>
+          Potty Tracker
+        </Typography>
+
+        <Typography className={classes.header} align='center' variant='h4'>
+          {formatTime()}
+        </Typography>
+        <div className={classes.activity}>
+          <InputLabel htmlFor='select'>Puppy Activity</InputLabel>
+
+          <NativeSelect
+            id='select'
+            value={activity}
+            onChange={handleChange}
+            inputProps={{ name: 'activity', id: 'select' }}
+          >
+            <option aria-label='None' value='' />
+            <option value={'Food'}>Food</option>
+            <option value={'Water'}>Water</option>
+            <option value={'Play'}>Play</option>
+            <option value={'Sleep'}>Sleep</option>
+          </NativeSelect>
+
+          {!isActive ? (
             <Button
+              aria-live='polite'
               className={classes.button}
               variant={'contained'}
               size='large'
               color={'primary'}
               onClick={() => {
-                restartTimer();
+                startTimer();
               }}
             >
-              Restart
+              Start
             </Button>
-            <Typography variant='h6'>Potty Achieved</Typography>
-
+          ) : (
             <Button
+              aria-live='polite'
               className={classes.button}
               variant={'contained'}
               size='large'
               color={'secondary'}
               onClick={() => {
-                submitTime(time);
+                stopTime(time);
               }}
             >
-              Submit Time
+              Stop
             </Button>
-          </div>
-        </Paper>
-      </div>
-    </>
+          )}
+
+          <Button
+            className={classes.button}
+            variant={'contained'}
+            size='large'
+            color={'primary'}
+            onClick={() => {
+              restartTimer();
+            }}
+          >
+            Restart
+          </Button>
+          <Typography variant='h6'>Potty Achieved</Typography>
+
+          <Button
+            className={classes.button}
+            variant={'contained'}
+            size='large'
+            color={'secondary'}
+            onClick={() => {
+              submitTime(time);
+            }}
+          >
+            Submit Time
+          </Button>
+        </div>
+      </Paper>
+    </div>
   );
 };
 

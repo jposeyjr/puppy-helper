@@ -22,6 +22,7 @@ const Puppies = ({ puppy, setCurrentId }) => {
   const history = useHistory();
 
   const routeChange = () => {
+    setCurrentId(puppy._id);
     history.push('/tracker');
   };
   return (
