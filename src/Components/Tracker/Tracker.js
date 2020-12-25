@@ -53,6 +53,7 @@ const Tracker = (props) => {
         activity: activity,
         puppyId: props.currentId,
       };
+      console.log(timeObj);
       dispatch(createTracker(timeObj));
       clearInterval(countRef.current);
       setIsActive(false);

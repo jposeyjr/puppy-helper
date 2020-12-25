@@ -1,9 +1,17 @@
 /* eslint-disable import/no-anonymous-default-export */
-import { FETCH_ALL, UPDATE, DELETE, CREATE } from '../Constants/actionsTypes';
+import {
+  FETCH_TRACKER,
+  FETCH_TRACKER_ID,
+  UPDATE,
+  DELETE,
+  CREATE,
+} from '../Constants/actionsTypes';
 
 export default (trackingData = [], action) => {
   switch (action.type) {
-    case FETCH_ALL:
+    case FETCH_TRACKER:
+      return action.payload;
+    case FETCH_TRACKER_ID:
       return action.payload;
     case CREATE:
       return [...trackingData, action.payload];

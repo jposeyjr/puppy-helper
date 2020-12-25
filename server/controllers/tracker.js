@@ -12,8 +12,9 @@ export const getTracker = async (req, res) => {
 
 export const getTrackerById = async (req, res) => {
   const { id } = req.params;
+  console.log(id);
   try {
-    const pottyData = await TrackerData.findById(id);
+    const pottyData = await TrackerData.findOne({ puppyId: id });
     res.status(200).json(pottyData);
   } catch (error) {
     res.status(400).json({ message: error.message });

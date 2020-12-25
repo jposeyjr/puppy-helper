@@ -14,7 +14,16 @@ export const getStats = () => async (dispatch) => {
 
     dispatch({ type: FETCH_TRACKER, payload: data });
   } catch (error) {
-    console.log(error.message);
+    console.log('T All', error.message);
+  }
+};
+
+export const getById = (id) => async (dispatch) => {
+  try {
+    const { data } = await api.fetchById(id);
+    dispatch({ type: FETCH_TRACKER_ID, payload: data });
+  } catch (error) {
+    console.log('T ID', error.message);
   }
 };
 
@@ -23,7 +32,7 @@ export const createTracker = (tracker) => async (dispatch) => {
     const { data } = await api.createTracker(tracker);
     dispatch({ type: CREATE_TRACKER, payload: data });
   } catch (error) {
-    console.log(error.message);
+    console.log('T Create', error.message);
   }
 };
 
@@ -31,7 +40,9 @@ export const updateTracker = (id, tracker) => async (dispatch) => {
   try {
     const { data } = await api.updateTracker(id, tracker);
     dispatch({ type: UPDATE_TRACKER, payload: data });
-  } catch (error) {}
+  } catch (error) {
+    console.log('T Update', error.message);
+  }
 };
 
 export const deleteTracker = (id) => async (dispatch) => {
@@ -39,6 +50,6 @@ export const deleteTracker = (id) => async (dispatch) => {
     await api.deleteTracker(id);
     dispatch({ type: DELETE_TRACKER, payload: id });
   } catch (error) {
-    console.log(error.message);
+    console.log('T Delete', error.message);
   }
 };
