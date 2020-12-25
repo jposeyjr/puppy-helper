@@ -8,7 +8,7 @@ export const getPuppies = () => async (dispatch) => {
 
     dispatch({ type: FETCH_ALL, payload: data });
   } catch (error) {
-    console.log(error.message);
+    console.log('P get', error.message);
   }
 };
 
@@ -17,7 +17,7 @@ export const createPuppy = (puppy) => async (dispatch) => {
     const { data } = await api.createPuppy(puppy);
     dispatch({ type: CREATE, payload: data });
   } catch (error) {
-    console.log(error.message);
+    console.log('P create', error.message);
   }
 };
 
@@ -25,7 +25,9 @@ export const updatePuppy = (id, puppy) => async (dispatch) => {
   try {
     const { data } = await api.updatePuppy(id, puppy);
     dispatch({ type: UPDATE, payload: data });
-  } catch (error) {}
+  } catch (error) {
+    console.log('P update', error.message);
+  }
 };
 
 export const deletePuppy = (id) => async (dispatch) => {
@@ -33,6 +35,6 @@ export const deletePuppy = (id) => async (dispatch) => {
     await api.deletePuppy(id);
     dispatch({ type: DELETE, payload: id });
   } catch (error) {
-    console.log(error.message);
+    console.log('P delete', error.message);
   }
 };

@@ -1,4 +1,3 @@
-import Header from '../Header/Header';
 import Form from '../Form/Form';
 import Puppy from '../Puppy/Puppy';
 import React from 'react';
@@ -7,7 +6,6 @@ import { Container, Grow, Grid } from '@material-ui/core';
 const Home = (props) => {
   return (
     <Container maxWidth='lg'>
-      <Header />
       <Grow in>
         <Container>
           <Grid

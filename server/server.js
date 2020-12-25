@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import puppyRoute from './routes/puppy.js';
+import trackerRoute from './routes/tracker.js';
 dotenv.config();
 const app = express();
 
@@ -13,6 +14,7 @@ app.use(express.static('build'));
 app.use(cors());
 
 app.use('/puppy', puppyRoute);
+app.use('/tracker', trackerRoute);
 
 const CONNECTION_URL = process.env.MONGO_URL;
 const PORT = process.env.PORT || 5000;
