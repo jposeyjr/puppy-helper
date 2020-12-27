@@ -16,7 +16,7 @@ const PuppyChart = () => {
         hoverBackgroundColor: 'rgba(255,99,132,0.4)',
         hoverBorderColor: 'rgba(255,99,132,1)',
         data:
-          pottyTime.length > 1 ? pottyTime.map((puppy) => puppy.time) : null,
+          pottyTime.length > 1 ? pottyTime.map((puppy) => puppy.time) : null, //TODO FORMAT THIS
       },
     ],
   };
