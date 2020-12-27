@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NativeSelect, InputLabel, FormControl } from '@material-ui/core';
 import { getById } from '../../Actions/tracker';
-import PuppyChart from './PuppyChart';
 const Results = () => {
   const [puppySelect, setSelected] = useState('');
   //used to get puppy info to render results
@@ -14,10 +13,9 @@ const Results = () => {
     dispatch(getById(puppySelect));
   };
   return (
-    <div>
-      <h1>Results</h1>
+    <>
       <FormControl>
-        <InputLabel htmlFor='select'>Puppy Activity</InputLabel>
+        <InputLabel htmlFor='select'>Puppy To Track</InputLabel>
         <NativeSelect id='select' value={puppySelect} onChange={handleChange}>
           <option aria-label='None' value='' />
           {puppies.map((puppy) => (
@@ -28,8 +26,7 @@ const Results = () => {
           ;
         </NativeSelect>
       </FormControl>
-      <PuppyChart />
-    </div>
+    </>
   );
 };
 

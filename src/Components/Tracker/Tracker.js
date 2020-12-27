@@ -8,8 +8,8 @@ import {
   InputLabel,
 } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
-import { createTracker } from '../../Actions/tracker';
-
+import { createTracker, updateTracker } from '../../Actions/tracker';
+import Results from '../Results/Results';
 const Tracker = (props) => {
   const [time, setTime] = useState(0);
   const [activity, setActivity] = useState('');
@@ -32,13 +32,6 @@ const Tracker = (props) => {
     return `${getHours} : ${getMinutes} : ${getSeconds}`;
   };
 
-  const startTimer = () => {
-    setIsActive(true);
-    countRef.current = setInterval(() => {
-      setTime((time) => time + 1);
-    }, 1000);
-  };
-
   const restartTimer = () => {
     clearInterval(countRef.current);
     setActivity('');
@@ -46,26 +39,40 @@ const Tracker = (props) => {
     setTime(0);
   };
 
-  const submitTime = () => {
-    if (!isActive && activity.length > 1) {
+  const startTimer = () => {
+    setIsActive(true);
+    countRef.current = setInterval(() => {
+      setTime((time) => time + 1);
+    }, 1000);
+    if (activity.length > 1) {
       let timeObj = {
-        time: time,
+        startTime: Date.now(),
         activity: activity,
         puppyId: props.currentId,
       };
       console.log(timeObj);
       dispatch(createTracker(timeObj));
-      clearInterval(countRef.current);
-      setIsActive(false);
-      setTime(0);
     } else {
-      alert('Please stop the timer before submitting time');
+      alert('Please select an activity');
     }
   };
 
   const stopTime = () => {
+    if (activity.length > 1) {
+      let timeObj = {
+        endTime: Date.now(),
+        activity: activity,
+        puppyId: props.currentId,
+      };
+      console.log(timeObj);
+      dispatch(updateTracker(props.currentId, timeObj));
+    } else {
+      alert('Please select an activity');
+    }
     clearInterval(countRef.current);
     setIsActive(false);
+    setActivity('');
+    setTime(0);
   };
 
   return (
@@ -80,7 +87,6 @@ const Tracker = (props) => {
         </Typography>
         <div className={classes.activity}>
           <InputLabel htmlFor='select'>Puppy Activity</InputLabel>
-
           <NativeSelect
             id='select'
             value={activity}
@@ -109,42 +115,30 @@ const Tracker = (props) => {
             </Button>
           ) : (
             <Button
-              aria-live='polite'
               className={classes.button}
               variant={'contained'}
               size='large'
-              color={'secondary'}
+              color={'primary'}
               onClick={() => {
-                stopTime(time);
+                restartTimer();
               }}
             >
-              Stop
+              Restart
             </Button>
           )}
-
-          <Button
-            className={classes.button}
-            variant={'contained'}
-            size='large'
-            color={'primary'}
-            onClick={() => {
-              restartTimer();
-            }}
-          >
-            Restart
-          </Button>
           <Typography variant='h6'>Potty Achieved</Typography>
 
           <Button
+            aria-live='polite'
             className={classes.button}
             variant={'contained'}
             size='large'
             color={'secondary'}
             onClick={() => {
-              submitTime(time);
+              stopTime(time);
             }}
           >
-            Submit Time
+            Stop
           </Button>
         </div>
       </Paper>

@@ -22,11 +22,13 @@ export const getTrackerById = async (req, res) => {
 };
 
 export const createTracker = async (req, res) => {
-  const { time, activity, puppyId } = req.body;
+  const { startTime, endTime, activity, puppyId, name } = req.body;
   const newPotty = new TrackerData({
-    time,
+    startTime,
+    endTime,
     activity,
     puppyId,
+    name
   });
   try {
     await newPotty.save();
@@ -38,15 +40,17 @@ export const createTracker = async (req, res) => {
 
 export const updateTracker = async (req, res) => {
   const { id } = req.params;
-  const { time, activity, puppyId } = req.body;
+  const { startTime, endTime, activity, puppyId, name } = req.body;
 
   if (!mongoose.Types.ObjectId.isValid(id))
     return res.status(404).send(`No potty data with that id to update: ${id}`);
 
   const updatedTracker = new TrackerData({
-    time,
+    startTime,
+    endTime,
     activity,
     puppyId,
+    name
   });
 
   await TrackerData.findByIdAndUpdate(id, updatedTracker, { new: true });
