@@ -6,11 +6,12 @@ import moment from 'moment';
 
 const Results = () => {
   const pottyTime = useSelector((state) => state.tracker);
+
   const chartData = () => {
     try {
-      let timeData = pottyTime.map((puppy) =>
-        moment(puppy.startTime).diff(moment(puppy.endTime))
-      );
+      let timeData = pottyTime.map((puppy) => {
+        return moment(puppy.endTime).diff(moment(puppy.startTime));
+      });
       return timeData;
     } catch (error) {
       console.log('time not ready', error);
@@ -21,7 +22,7 @@ const Results = () => {
     labels: ['Food', 'Water', 'Play', 'Sleep'],
     datasets: [
       {
-        label: 'Average Potty Time In Seconds',
+        label: 'Average Potty Time',
         backgroundColor: 'rgba(255,99,132,0.2)',
         borderColor: 'rgba(255,99,132,1)',
         borderWidth: 1,
@@ -34,6 +35,7 @@ const Results = () => {
   return (
     <>
       <Paper>
+        {/* <p>{JSON.stringify(chartData())}</p> */}
         <Selector />
         <div className='header'>
           <h1 className='title'>Average Potty Time</h1>
