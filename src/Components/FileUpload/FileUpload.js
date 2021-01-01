@@ -23,7 +23,7 @@ export default class FileUpload extends React.Component {
       // Convert the file to base64 text
       reader.readAsDataURL(file);
 
-      // on reader load somthing...
+      // on reader load something...
       reader.onload = () => {
         // Make a fileInfo Object
         let fileInfo = {
@@ -56,6 +56,7 @@ export default class FileUpload extends React.Component {
   render() {
     return (
       <input
+        id={this.props.id}
         type='file'
         onChange={this.handleChange.bind(this)}
         multiple={this.props.multiple}

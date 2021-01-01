@@ -28,7 +28,7 @@ export const createTracker = async (req, res) => {
     endTime,
     activity,
     puppyId,
-    name
+    name,
   });
   try {
     await newPotty.save();
@@ -41,7 +41,6 @@ export const createTracker = async (req, res) => {
 export const updateTracker = async (req, res) => {
   const { id } = req.params;
   const { startTime, endTime, activity, puppyId, name } = req.body;
-
   if (!mongoose.Types.ObjectId.isValid(id))
     return res.status(404).send(`No potty data with that id to update: ${id}`);
 
@@ -50,7 +49,7 @@ export const updateTracker = async (req, res) => {
     endTime,
     activity,
     puppyId,
-    name
+    name,
   });
 
   await TrackerData.findByIdAndUpdate(id, updatedTracker, { new: true });

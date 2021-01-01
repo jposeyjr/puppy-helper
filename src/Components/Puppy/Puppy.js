@@ -8,7 +8,10 @@ const Puppy = ({ setCurrentId }) => {
   const puppies = useSelector((state) => state.puppies);
   const classes = useStyles();
   return !puppies.length ? (
-    <CircularProgress />
+    <>
+      <h1>Please submit a puppy!</h1>
+      <CircularProgress />
+    </>
   ) : (
     <Grid
       className={classes.container}

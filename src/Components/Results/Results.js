@@ -2,21 +2,27 @@ import { Bar } from 'react-chartjs-2';
 import { Paper } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import Selector from './Selector';
+import moment from 'moment';
 
 const Results = () => {
   const pottyTime = useSelector((state) => state.tracker);
+
   const chartData = () => {
-    let timeData = pottyTime.map(
-      (puppy) =>
-        new Date(puppy.endTime).getTime() - new Date(puppy.startTime).getTime()
-    );
-    return timeData;
+    try {
+      let timeData = pottyTime.map((puppy) => {
+        return moment(puppy.endTime).diff(moment(puppy.startTime));
+      });
+      return timeData;
+    } catch (error) {
+      console.log('time not ready', error);
+      return 0;
+    }
   };
   const data = {
     labels: ['Food', 'Water', 'Play', 'Sleep'],
     datasets: [
       {
-        label: 'Average Potty Time In Seconds',
+        label: 'Average Potty Time',
         backgroundColor: 'rgba(255,99,132,0.2)',
         borderColor: 'rgba(255,99,132,1)',
         borderWidth: 1,
@@ -29,6 +35,7 @@ const Results = () => {
   return (
     <>
       <Paper>
+        {/* <p>{JSON.stringify(chartData())}</p> */}
         <Selector />
         <div className='header'>
           <h1 className='title'>Average Potty Time</h1>
