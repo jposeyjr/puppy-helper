@@ -9,7 +9,7 @@ import {
 } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 import { createTracker, updateTracker } from '../../Actions/tracker';
-import Results from '../Results/Results';
+import Results from '../Results/Selector';
 const Tracker = (props) => {
   const [time, setTime] = useState(0);
   const [activity, setActivity] = useState('');
