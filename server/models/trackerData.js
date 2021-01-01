@@ -5,7 +5,6 @@ const trackerSchema = mongoose.Schema({
   startTime: { type: Date, default: Date.now },
   endTime: { type: Date, default: Date.now },
   activity: String,
-  name: String,
 });
 
 const TrackerData = mongoose.model('TrackerData', trackerSchema);
