@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import { Tab, Tabs, AppBar, Typography } from '@material-ui/core';
+import { Tab, Tabs } from '@material-ui/core';
 import { getPuppies } from '../../Actions/puppy';
 import Home from '../Home/Home';
 import Tracker from '../Tracker/Tracker';
 import useStyles from './styles';
 import Results from '../Results/Results';
-import puppyImg from '../../images/puppy.svg';
+import Header from '../Header/Header';
 
 const App = () => {
   const [value, setValue] = useState(0);
@@ -22,37 +22,27 @@ const App = () => {
   }, [currentId, dispatch]);
   return (
     <Router>
-      <AppBar className={classes.appBar} position='static' color='inherit'>
-        <Typography className={classes.heading} variant='h2' align='center'>
-          Puppy Helper
-          <img
-            className={classes.image}
-            src={puppyImg}
-            alt='icon'
-            height='60'
-          />
-        </Typography>
-        <Tabs
-          variant={'fullWidth'}
-          className={classes.tabStyles}
-          aria-label='navigation bar with home, tracker and results tabs'
-          value={value}
-          onChange={(e, value) => setValue(value)}
-        >
-          <Tab
-            className={classes.tabItemStyles}
-            label={'Home'}
-            to='/'
-            component={Link}
-          />
-          <Tab
-            className={classes.tabItemStyles}
-            label={'Results'}
-            to='/results'
-            component={Link}
-          />
-        </Tabs>
-      </AppBar>
+      <Header />
+      <Tabs
+        variant={'fullWidth'}
+        className={classes.tabStyles}
+        aria-label='navigation bar with home, tracker and results tabs'
+        value={value}
+        onChange={(e, value) => setValue(value)}
+      >
+        <Tab
+          className={classes.tabItemStyles}
+          label={'Home'}
+          to='/'
+          component={Link}
+        />
+        <Tab
+          className={classes.tabItemStyles}
+          label={'Results'}
+          to='/results'
+          component={Link}
+        />
+      </Tabs>
       <Route exact path='/'>
         <Home currentId={currentId} setCurrentId={setCurrentId} />
       </Route>
