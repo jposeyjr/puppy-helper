@@ -6,34 +6,28 @@ import FileUpload from '../FileUpload/FileUpload';
 import useStyles from './styles';
 
 const Form = ({ currentId, setCurrentId }) => {
-  const [puppyData, setPuppyData] = useState({
+  const initState = {
     name: '',
     birthday: '',
     breed: '',
     weight: '',
     height: '',
     photo: '',
-  });
+  };
+  const [puppyData, setPuppyData] = useState(initState);
   const puppy = useSelector((state) =>
     currentId ? state.puppies.find((dog) => dog._id === currentId) : null
   );
   const dispatch = useDispatch();
   const classes = useStyles();
-
   useEffect(() => {
     if (puppy) setPuppyData(puppy);
   }, [puppy]);
 
-  const clear = () => {
+  const clear = (e) => {
     setCurrentId(0);
-    setPuppyData({
-      name: '',
-      birthday: '',
-      breed: '',
-      weight: '',
-      height: '',
-      photo: '',
-    });
+    setPuppyData({ ...initState });
+    document.querySelector('input[type=file]').value = '';
   };
 
   const handleSubmit = async (e) => {
@@ -118,6 +112,7 @@ const Form = ({ currentId, setCurrentId }) => {
         />
         <div className={classes.fileInput}>
           <FileUpload
+            id='upload'
             accept={'.jpeg, .png, .jpg'}
             multiple={false}
             onDone={({ base64 }) =>

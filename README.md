@@ -10,20 +10,34 @@ Puppy-Helper is an app that is designed to help raise your new puppy! I found th
 
 Puppy-Helper was used to learn MongoDB and Thunk and is still in progress.
 
-## Duration
-
-5 Hours
-
 ## Built With
 
 React, React Hooks, Redux, MongoDB, Mongoose, Node, Express, Axios, React-Thunk, React-Router
 
-## Screenshot
+## Set Up
 
-![Puppy helper website](./screenshot.png)
+You will need to do a yarn install to get all the dependencies, along with setting up a mongodb cluster, then you will need to create a .env file with the follow info replace generic one with the option from mongo.
+
+```
+PORT = 5000
+MONGO_URL = 'mongodb+srv://username:password@clustername/dbname'
+```
+
+Open a new terminal and type in
+
+```
+yarn run server
+```
+
+\*Not the same one as above!
+Open a new terminal and type in
+
+```
+yarn run client.
+```
 
 ## Credits
 
-Image by [aleksandra85foto](https://pixabay.com/users/aleksandra85foto-463403/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=635410")
+Header Image by [aleksandra85foto](https://pixabay.com/users/aleksandra85foto-463403/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=635410")
 
-React Filebase64 for showing me how to handle image files to base64. Modified the code to allow more props to limit errors.
+React Filebase64 for showing me how to handle image files to base64. Refactored the code to allow more props to limit errors.

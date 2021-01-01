@@ -2,15 +2,20 @@ import { Bar } from 'react-chartjs-2';
 import { Paper } from '@material-ui/core';
 import { useSelector } from 'react-redux';
 import Selector from './Selector';
+import moment from 'moment';
 
 const Results = () => {
   const pottyTime = useSelector((state) => state.tracker);
   const chartData = () => {
-    let timeData = pottyTime.map(
-      (puppy) =>
-        new Date(puppy.endTime).getTime() - new Date(puppy.startTime).getTime()
-    );
-    return timeData;
+    try {
+      let timeData = pottyTime.map((puppy) =>
+        moment(puppy.startTime).diff(moment(puppy.endTime))
+      );
+      return timeData;
+    } catch (error) {
+      console.log('time not ready', error);
+      return 0;
+    }
   };
   const data = {
     labels: ['Food', 'Water', 'Play', 'Sleep'],
